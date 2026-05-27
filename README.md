@@ -59,36 +59,7 @@ Miller Compensation Capacitor
 | **DC Analysis** | Bias point verification, transistor operating region check |
 | **Pole-Zero (PZ)** | Full stability analysis — all poles confirmed in LHP |
 
----
 
-## Simulation Results
-
-### AC Response — Gain & Phase
-![AC Response](simulations/Gain.png)
-
-Open loop gain of **82 dB** with GBW of **30 MHz** and phase margin of **146°**.
-
-### CMRR
-![CMRR](simulations/CMRR.png)
-
-Common Mode Rejection Ratio of **76 dB**.
-
-### PSRR
-![PSRR](simulations/PSRR.png)
-
-Power Supply Rejection Ratio of **-70 dB**.
-
-### Pole-Zero Analysis
-![Pole Zero](simulations/PZ.png)
-
-All poles confirmed on the **Left Half Plane** — fully stable system.
-
-### DC Operating Point
-![DC](simulations/DC.png)
-
-All transistors verified in saturation region at correct bias point.
-
----
 
 ## Key Results Summary
 
