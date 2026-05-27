@@ -1,61 +1,121 @@
-# Analog IC Design Portfolio
+# Two-Stage Operational Amplifier
 
-![Cadence Virtuoso](https://img.shields.io/badge/Tool-Cadence%20Virtuoso-blue)
-![Technology](https://img.shields.io/badge/Technology-180nm%20%7C%2045nm%20TSMC-green)
-![Simulator](https://img.shields.io/badge/Simulator-ADE%20L%20%7C%20Spectre-orange)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Technology](https://img.shields.io/badge/Technology-gpdk180%20180nm-green)
+![Tool](https://img.shields.io/badge/Tool-Cadence%20Virtuoso-blue)
+![Simulator](https://img.shields.io/badge/Simulator-ADE%20L%20Spectre-orange)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+![Stability](https://img.shields.io/badge/Stability-Fully%20Stable-brightgreen)
 
-This repository contains analog IC design projects developed as part of academic coursework using **Cadence Virtuoso** with **ADE L (Spectre)** simulator. Each project includes schematics and simulation results.
-
----
-
-## Projects
-
-| Project | Technology | Status | Description |
-|---------|-----------|--------|-------------|
-| [OPAMP](./OPAMP/) | 45nm TSMC | ✅ Complete | Two-stage differential operational amplifier |
-| [SRAM](./SRAM/) | 180nm TSMC | ✅ Complete | 6T SRAM cell with SNM analysis |
-| [PLL](./PLL/) | 180nm TSMC | 🔄 In Progress | Phase-Locked Loop — PFD & VCO simulated |
-| [Sense Amplifier](./Sense_Amplifier/) | 180nm TSMC | ⏳ Coming Soon | Voltage-mode sense amplifier |
+A **Two-Stage Operational Amplifier** designed and simulated in Cadence Virtuoso using **gpdk180 (180nm)** technology. The design achieves high gain, excellent CMRR and PSRR, and is verified to be a fully stable system with all poles on the Left Half Plane (LHP).
 
 ---
 
-## Tools & Environment
+## Specifications
 
-| Tool | Details |
-|------|---------|
-| **EDA Tool** | Cadence Virtuoso |
-| **Simulator** | Spectre via ADE L |
-| **Technology** | TSMC 45nm (OPAMP), TSMC 180nm (rest) |
-| **OS** | Linux (Cadence environment) |
+| Parameter | Value |
+|-----------|-------|
+| Supply Voltage (VDD) | 1.8V |
+| Technology Node | gpdk180 (180nm) |
+| Topology | Two-Stage Amplifier |
+| Open Loop Gain | **82 dB** |
+| CMRR | **76 dB** |
+| PSRR | **-70 dB** |
+| Phase Margin | **146°** |
+| Gain Bandwidth Product (GBW) | **30 MHz** |
+| Stability | ✅ Fully Stable — All poles in LHP |
+| Simulator | Spectre (ADE L) |
 
 ---
 
-## Repository Structure
+## Design Overview
+
+A **Two-Stage Operational Amplifier** consists of:
 
 ```
-Analog_IC_Portfolio/
-├── OPAMP/
-│   ├── schematics/       ← Schematic screenshots
-│   ├── simulations/      ← Waveform & result screenshots
-│   └── README.md
-├── SRAM/
-│   ├── schematics/
-│   ├── simulations/
-│   └── README.md
-├── PLL/
-│   ├── schematics/
-│   ├── simulations/
-│   └── README.md
-└── Sense_Amplifier/
-    ├── schematics/
-    ├── simulations/
-    └── README.md
+Differential Input Stage (First Stage)
+            │
+            ▼
+      Active Load
+            │
+            ▼
+  Second Gain Stage (Common Source)
+            │
+            ▼
+Miller Compensation Capacitor
 ```
+
+- **First Stage** — Differential pair with active current mirror load providing high gain and good CMRR
+- **Second Stage** — Common source amplifier providing additional voltage gain
+- **Miller Compensation** — Ensures stability with a phase margin of 146°
+- **Stability** — All poles verified on the Left Half Plane via PZ analysis
 
 ---
 
-## About
+## Simulations Performed
 
-Designed and simulated by **Aryan** as part of analog IC design academic projects.
-Feel free to explore each project folder for detailed schematics and simulation results.
+| Analysis | Purpose |
+|----------|---------|
+| **AC Analysis** | Open loop gain, GBW, Phase Margin, CMRR, PSRR |
+| **DC Analysis** | Bias point verification, transistor operating region check |
+| **Pole-Zero (PZ)** | Full stability analysis — all poles confirmed in LHP |
+
+---
+
+## Simulation Results
+
+### AC Response — Gain & Phase
+![AC Response](simulations/Gain.png)
+
+Open loop gain of **82 dB** with GBW of **30 MHz** and phase margin of **146°**.
+
+### CMRR
+![CMRR](simulations/CMRR.png)
+
+Common Mode Rejection Ratio of **76 dB**.
+
+### PSRR
+![PSRR](simulations/PSRR.png)
+
+Power Supply Rejection Ratio of **-70 dB**.
+
+### Pole-Zero Analysis
+![Pole Zero](simulations/PZ.png)
+
+All poles confirmed on the **Left Half Plane** — fully stable system.
+
+### DC Operating Point
+![DC](simulations/DC.png)
+
+All transistors verified in saturation region at correct bias point.
+
+---
+
+## Key Results Summary
+
+| Parameter | Value | Status |
+|-----------|-------|--------|
+| Open Loop Gain | 82 dB | ✅ |
+| CMRR | 76 dB | ✅ |
+| PSRR | -70 dB | ✅ |
+| Phase Margin | 146° | ✅ Excellent |
+| GBW | 30 MHz | ✅ |
+| Stability | All poles in LHP | ✅ Fully Stable |
+
+---
+
+## Design Notes
+
+- **Two-stage topology** chosen for high gain with good output swing
+- **Miller compensation** applied between first and second stage for stability
+- Phase margin of **146°** indicates an extremely stable, well-compensated design
+- All poles confirmed on **Left Half Plane** via PZ analysis
+- Simulated using **Spectre** via **ADE L** in Cadence Virtuoso
+
+---
+
+## Future Improvements
+
+- [ ] Transient step response simulation
+- [ ] Process corner analysis (TT, FF, SS, SF, FS)
+- [ ] Monte Carlo analysis for mismatch
+- [ ] Output swing and slew rate measurement
